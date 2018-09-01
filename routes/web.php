@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/settings', 'Settings\ShowSetting')->name('settings.index');
+
+Route::resource('/team', 'TeamController');
+
+Route::post('team/{id}/apply', 'TeamMemberController@apply')->name('member.apply');
