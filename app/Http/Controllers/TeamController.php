@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Team;
 use App\TeamMember;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\TeamStoreRequest as StoreRequest;
 
 class TeamController extends Controller
 {
@@ -16,11 +17,20 @@ class TeamController extends Controller
      */
     public function index()
     {
+        // The query which related with members.
         $isMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
+
+        // Queries which related with non-members and passive members.
         $passiveMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', false)->first();
         $teams = Team::all();
 
-        return view('team.index')->withIsMember($isMember)->withTeams($teams)->withPassiveMember($passiveMember);
+        if(isset($isMember)) {
+          $members = TeamMember::where('team_id', $isMember->team_id)->where('is_active', true)->first();
+
+          return view('team.dashboard')->withIsMember($isMember)->withMembers($members);
+        }else {
+          return view('team.index')->withPassiveMember($passiveMember)->withTeams($teams);
+        }
     }
 
     /**
@@ -39,7 +49,7 @@ class TeamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $data = $request->all();
 
@@ -51,7 +61,7 @@ class TeamController extends Controller
 
         TeamMember::create($data);
 
-        return redirect()->route('team.index')->with('success', 'Ekip başarılı bir şekilde kuruldu.');
+        return redirect()->route('teams.index')->with('success', 'Ekip başarılı bir şekilde kuruldu.');
     }
 
     /**

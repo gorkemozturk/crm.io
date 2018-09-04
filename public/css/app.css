@@ -15,6 +15,9 @@ body {
   border-radius: 0;
   box-shadow: none;
 }
+.ui.secondary.pointing.menu .active.item:last-child {
+  border-radius: 0;
+}
 .ui.menu .borderless.item:before {
   background: none;
 }

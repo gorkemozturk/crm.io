@@ -24,7 +24,7 @@
         <a class="borderless item">
           {{ __('Directory') }}
         </a>
-        <a href="{{ route('team.index') }}" class="borderless item">
+        <a href="{{ route('teams.index') }}" class="borderless {{ Request::is('teams*') ? 'active' : '' }} item">
           {{ __('My Team') }}
         </a>
         <div class="right menu">

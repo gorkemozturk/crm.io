@@ -1,28 +1,21 @@
 @extends('layouts.app')
 
 @section('title')
-  {{ __('Ayarlar') }}
+  {{ __('Takımlar') }}
 @endsection
 
 @section('content')
 <div class="ui right aligned basic horizontally fitted segment">
-  @if(isset($isMember))
-    <a style="margin: 0" class="ui basic grey button">
-      <i class="setting icon"></i>
-      {{ __('Ekibi Düzenle') }}
+  @if(isset($passiveMember))
+    <a style="margin: 0" class="ui positive basic disabled button">
+      <i class="plus circle icon"></i>
+      {{ __('Yeni Ekip Kur') }}
     </a>
   @else
-    @if(isset($passiveMember))
-      <a style="margin: 0" class="ui positive basic disabled button">
-        <i class="plus circle icon"></i>
-        {{ __('Yeni Ekip Kur') }}
-      </a>
-    @else
-      <a style="margin: 0" class="ui positive basic new team button">
-        <i class="plus circle icon"></i>
-        {{ __('Yeni Ekip Kur') }}
-      </a>
-    @endif
+    <a style="margin: 0" class="ui positive basic new team button">
+      <i class="plus circle icon"></i>
+      {{ __('Yeni Ekip Kur') }}
+    </a>
   @endif
 </div>
 
@@ -37,9 +30,6 @@
     {{ __('Ekipler') }}
   </div>
   <div class="ui fitted segment">
-    @if(isset($isMember))
-      üye
-    @else
     <table class="ui celled four column table">
       <thead>
         <tr>
@@ -78,7 +68,6 @@
         @endforeach
       </tbody>
     </table>
-    @endif
   </div>
   <div class="ui center aligned segment">
     @if(isset($isMember))
@@ -96,7 +85,7 @@
       {{ __('Yeni Ekip Kur') }}
     </div>
     <div class="ui segment">
-      <form id="store-form" action="{{ route('team.store') }}" method="POST" class="ui form">
+      <form id="store-form" action="{{ route('teams.store') }}" method="POST" class="ui form">
         @csrf
         <div class="field {{ $errors->has('name') ? 'error' : '' }}">
           <label style="text-align: left">{{ __('Ekip Adı') }}</label>

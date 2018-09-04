@@ -11,7 +11,7 @@
   </div>
   <div class="ui center aligned segment">
     <div class="ui secondary pointing compact menu">
-      <a class="item">Sektör Ayarları</a>
+      <a class="item">{{ __('Sektör Ayarları') }}</a>
     </div>
   </div>
   <div class="ui segment">

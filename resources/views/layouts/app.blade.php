@@ -18,7 +18,7 @@
 </head>
 <body>
   <div id="app">
-    @include('_includes.menu.main-menu')
+    @include('_includes.menu.main')
 
     <div class="ui small container">
       @include('_includes.messages')
