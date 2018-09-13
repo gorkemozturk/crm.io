@@ -90,3 +90,7 @@ body {
 .ui.table tbody tr td {
   border-color: #F1F1F1;
 }
+
+.ui.label {
+  border-radius: .15em;
+}

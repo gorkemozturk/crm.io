@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-  {{ __('Takım Üyeleri') }}
+  {{ __('Ekibim') }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
 
 <div class="ui segments">
   <div class="ui center aligned segment">
-    {{ __('Ekip Üyeleri') }}
+    {{ __('Ekibim') }}
   </div>
   <div class="ui center aligned segment">
     @include('_includes.menu.team')

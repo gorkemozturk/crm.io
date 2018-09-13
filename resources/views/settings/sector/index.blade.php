@@ -17,43 +17,41 @@
                 {{ __('Yeni Sektör Oluştur') }}
             </a>
         </div>
-        <div class="ui fitted segment">
-            <table class="ui celled two column table">
-                <thead>
-                <tr>
-                    <th style="border-radius: 0">{{ __('Sektör Adı') }}</th>
-                    <th style="border-radius: 0" class="center aligned">{{ __('İşlem') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                @if(count($sectors) > 0)
-                    @foreach($sectors as $sector)
-                        <tr>
-                            <td>{{ $sector->name }}</td>
-                            <td class="center aligned">
-                                <div class="ui basic mini icon buttons">
-                                    <a href="{{ route('sector.edit', $sector->id) }}" class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Düzenle') }}">
-                                        <i class="edit icon"></i>
-                                    </a>
-                                    <a class="ui destroy-{{ $sector->id }} button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Sil') }}">
-                                        <i class="close icon"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                @else
+        @if(count($sectors) > 0)
+            <div class="ui fitted segment">
+                <table class="ui celled two column table">
+                    <thead>
                     <tr>
-                        <td colspan="2">
-                            <div class="ui info message">
-                                {{ __('Herhangi bir sektör bulunamadı.') }}
-                            </div>
-                        </td>
+                        <th style="border-radius: 0">{{ __('Sektör Adı') }}</th>
+                        <th style="border-radius: 0" class="center aligned">{{ __('İşlem') }}</th>
                     </tr>
-                @endif
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach($sectors as $sector)
+                            <tr>
+                                <td>{{ $sector->name }}</td>
+                                <td class="center aligned">
+                                    <div class="ui basic mini icon buttons">
+                                        <a href="{{ route('sector.edit', $sector->id) }}" class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Düzenle') }}">
+                                            <i class="edit icon"></i>
+                                        </a>
+                                        <a class="ui destroy-{{ $sector->id }} button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Sil') }}">
+                                            <i class="close icon"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="ui segment">
+                <div class="ui info message">
+                    {{ __('Herhangi bir sektör bulunamadı.') }}
+                </div>
+            </div>
+        @endif
         <div class="ui center aligned segment">
             {{ __('Toplam Sektör') }}: {{ count($sectors) }}
         </div>

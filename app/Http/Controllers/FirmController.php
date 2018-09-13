@@ -3,9 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\FirmStoreRequest as StoreRequest;
+use App\Firm as Model;
+use App\TeamMember;
+use Illuminate\Support\Facades\Auth;
 
 class FirmController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('memberless');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +28,9 @@ class FirmController extends Controller
      */
     public function index()
     {
-        //
+        $firms = Model::get();
+
+        return view('firm.index', compact('firms'));
     }
 
     /**
@@ -23,7 +40,7 @@ class FirmController extends Controller
      */
     public function create()
     {
-        //
+        return view('firm.create');
     }
 
     /**
@@ -32,9 +49,17 @@ class FirmController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $member = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
+
+        $data = $request->all();
+        $data['user_id'] = $member->user_id;
+        $data['team_id'] = $member->team_id;
+
+        Model::create($data);
+
+        return redirect()->route('firms.index')->with('success', trans('Firma başarılı bir şekilde eklendi.'));
     }
 
     /**

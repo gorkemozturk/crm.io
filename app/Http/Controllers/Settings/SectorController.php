@@ -20,6 +20,7 @@ class SectorController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('memberless');
     }
 
     /**
@@ -52,7 +53,7 @@ class SectorController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $member = TeamMember::where('user_id', Auth::user()->id)->first();
+        $member = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
 
         $data = $request->all();
         $data['team_id'] = $member->team_id;

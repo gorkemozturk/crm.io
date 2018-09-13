@@ -18,13 +18,13 @@
         <a class="borderless item">
           {{ __('Takvim') }}
         </a>
-        <a class="borderless item">
+        <a href="{{ route('firms.index') }}" class="borderless {{ Request::is('firms*') ? 'active' : '' }} item">
           {{ __('Firmalar') }}
         </a>
         <a class="borderless item">
           {{ __('Rehber') }}
         </a>
-        <a href="{{ route('teams.index') }}" class="borderless @if(Request::is('teams*')) active @elseif(Request::is('my-team*')) active @endif item">
+        <a href="{{ route('member.dashboard') }}" class="borderless {{ Request::is('my-team*') ? 'active' : '' }} item">
           {{ __('Ekibim') }}
         </a>
         <div class="right menu">

@@ -27,18 +27,10 @@ class TeamController extends Controller
      */
     public function index()
     {
-        // The query which related with members.
-        $isMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
-
-        // Queries which related with non-members and passive members.
         $passiveMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', false)->first();
         $teams = Team::all();
 
-        if(isset($isMember)) {
-          return redirect()->route('member.dashboard');
-        }else {
-          return view('team.index')->withPassiveMember($passiveMember)->withTeams($teams);
-        }
+        return view('team.index')->withPassiveMember($passiveMember)->withTeams($teams);
     }
 
     /**

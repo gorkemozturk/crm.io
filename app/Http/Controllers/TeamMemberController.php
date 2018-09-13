@@ -16,6 +16,7 @@ class TeamMemberController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('memberless')->only('dashboard');
     }
 
     /**
@@ -25,7 +26,7 @@ class TeamMemberController extends Controller
      */
     public function applications()
     {
-        $isMember = TeamMember::where('user_id', Auth::user()->id)->first();
+        $isMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
         $applicants = TeamMember::where('team_id', $isMember->team_id)->where('is_active', false)->get();
 
         return view('team.applicants')->withApplicants($applicants);
@@ -38,7 +39,7 @@ class TeamMemberController extends Controller
      */
     public function members()
     {
-        $isMember = TeamMember::where('user_id', Auth::user()->id)->first();
+        $isMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
         $members = TeamMember::where('team_id', $isMember->team_id)->where('is_active', true)->get();
 
         return view('team.members')->withMembers($members);
@@ -100,7 +101,7 @@ class TeamMemberController extends Controller
         $isMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
 
         // The query which related with member mates.
-        $members = TeamMember::where('team_id', $isMember->team_id)->where('is_active', true)->first();
+        $members = TeamMember::where('team_id', $isMember->team_id)->where('is_active', true)->get();
 
         return view('team.dashboard')->withIsMember($isMember)->withMembers($members);
     }

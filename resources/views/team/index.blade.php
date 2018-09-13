@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-  {{ __('Takımlar') }}
+  {{ __('Ekibim') }}
 @endsection
 
 @section('content')
@@ -29,18 +29,18 @@
   <div class="ui center aligned segment">
     {{ __('Ekipler') }}
   </div>
-  <div class="ui fitted segment">
-    <table class="ui celled four column table">
-      <thead>
+  @if(count($teams) > 0)
+    <div class="ui fitted segment">
+      <table class="ui celled four column table">
+        <thead>
         <tr>
           <th style="border-radius: 0">{{ __('Ekip Adı') }}</th>
           <th class="center aligned">{{ __('Üye Sayısı') }}</th>
           <th class="center aligned">{{ __('Kurucu Üye') }}</th>
           <th style="border-radius: 0" class="center aligned">{{ __('İşlem') }}</th>
         </tr>
-      </tr></thead>
-      <tbody>
-        @if(count($teams) > 0)
+        </thead>
+        <tbody>
           @foreach($teams as $team)
             <tr>
               <td>{{ $team->name }}</td>
@@ -67,24 +67,18 @@
               </td>
             </tr>
           @endforeach
-        @else
-          <tr>
-            <td colspan="4">
-              <div class="ui info message">
-                {{ __('Herhangi bir grup bulunamadı.') }}
-              </div>
-            </td>
-          </tr>
-        @endif
-      </tbody>
-    </table>
-  </div>
+        </tbody>
+      </table>
+    </div>
+  @else
+    <div class="ui segment">
+      <div class="ui info message">
+        {{ __('Herhangi bir grup bulunamdı.') }}
+      </div>
+    </div>
+  @endif
   <div class="ui center aligned segment">
-    @if(isset($isMember))
-      üye
-    @else
-      {{ __('Toplam Ekip Sayısı') }}: {{ count($teams) }}
-    @endif
+    {{ __('Toplam Ekip Sayısı') }}: {{ count($teams) }}
   </div>
 </div>
 
@@ -135,22 +129,22 @@
       <i class="close icon"></i>
       <div style="margin: 0" class="ui segments">
         <div class="ui center aligned secondary segment">
-          Devam Etmek İstediğinize Emin Misiniz?
+          {{ __('Devam Etmek İstediğinize Emin Misiniz?') }}
         </div>
         <div class="ui center aligned segment">
           <div class="ui info icon message">
             <i class="info icon"></i>
-            Yaptığınız işlemin geri dönüşü yoktur. Devam etmek istediğinize emin misiniz?
+            {{ __('Yaptığınız işlemin geri dönüşü yoktur. Devam etmek istediğinize emin misiniz?') }}
           </div>
         </div>
         <div class="ui center aligned secondary actions segment">
           <button type="submit" class="ui positive basic button" onclick="event.preventDefault();document.getElementById('apply-{{ $team->id }}-form').submit();">
             <i class="check icon"></i>
-            Gruba Başvur
+            {{ __('Gruba Başvur') }}
           </button>
           <a class="ui basic grey cancel button">
             <i class="close icon"></i>
-            Vazgeç
+            {{ __('Vazgeç') }}
           </a>
         </div>
       </div>
