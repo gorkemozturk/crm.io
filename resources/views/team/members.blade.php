@@ -14,7 +14,7 @@
 
 <div class="ui segments">
   <div class="ui center aligned segment">
-    {{ __('Ekip Aktiviteleri') }}
+    {{ __('Ekip Üyeleri') }}
   </div>
   <div class="ui center aligned segment">
     @include('_includes.menu.team')

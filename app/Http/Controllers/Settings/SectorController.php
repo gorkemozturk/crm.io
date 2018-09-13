@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Settings;
 
 use Illuminate\Http\Request;
-use App\Team;
+use App\Http\Controllers\Controller;
+use App\Sector as Model;
 use App\TeamMember;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\TeamStoreRequest as StoreRequest;
+use App\Http\Requests\SectorStoreRequest as StoreRequest;
+use App\Http\Requests\SectorUpdateRequest as UpdateRequest;
 
-class TeamController extends Controller
+class SectorController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,18 +29,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        // The query which related with members.
-        $isMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
+        $sectors = Model::get();
 
-        // Queries which related with non-members and passive members.
-        $passiveMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', false)->first();
-        $teams = Team::all();
-
-        if(isset($isMember)) {
-          return redirect()->route('member.dashboard');
-        }else {
-          return view('team.index')->withPassiveMember($passiveMember)->withTeams($teams);
-        }
+        return view('settings.sector.index', compact('sectors'));
     }
 
     /**
@@ -48,7 +41,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('settings.sector.create');
     }
 
     /**
@@ -59,17 +52,14 @@ class TeamController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $member = TeamMember::where('user_id', Auth::user()->id)->first();
+
         $data = $request->all();
+        $data['team_id'] = $member->team_id;
 
-        $team = Team::create($data);
+        Model::create($data);
 
-        $data['user_id'] = Auth::user()->id;
-        $data['team_id'] = $team->id;
-        $data['is_active'] = true;
-
-        TeamMember::create($data);
-
-        return redirect()->route('member.dashboard')->with('success', trans('Ekip başarılı bir şekilde kuruldu.'));
+        return redirect()->route('sector.index')->with('success', trans('Sektör başarılı bir şekilde eklendi.'));
     }
 
     /**
@@ -91,7 +81,9 @@ class TeamController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sector = Model::findOrFail($id);
+
+        return view('settings.sector.edit', compact('sector'));
     }
 
     /**
@@ -101,9 +93,11 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        Model::findOrFail($id)->update($request->all());
+
+        return redirect()->route('sector.index')->with('success', trans('Sektör başarılı bir şekilde güncellendi.'));
     }
 
     /**
@@ -114,6 +108,8 @@ class TeamController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Model::findOrFail($id)->delete();
+
+        return redirect()->route('sector.index')->with('success', trans('Sektör başarılı bir şekilde silindi.'));
     }
 }

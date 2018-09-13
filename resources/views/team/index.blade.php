@@ -40,32 +40,42 @@
         </tr>
       </tr></thead>
       <tbody>
-        @foreach($teams as $team)
+        @if(count($teams) > 0)
+          @foreach($teams as $team)
+            <tr>
+              <td>{{ $team->name }}</td>
+              <td class="center aligned">{{ count($team->members) }}</td>
+              <td class="center aligned">
+                @foreach($team->members as $founder)
+                  @if($loop->first)
+                    {{ $founder->user->name }}
+                  @endif
+                @endforeach
+              </td>
+              <td class="center aligned">
+                <div class="ui basic mini icon buttons">
+                  @if(isset($passiveMember))
+                    <a class="ui disabled button">
+                      <i class="check icon"></i>
+                    </a>
+                  @else
+                    <a class="ui icon apply-{{ $team->id }} button" class="ui button" data-content="{{ __('Ekibe Başvur') }}" data-variation="mini inverted" data-position="top center">
+                      <i class="check icon"></i>
+                    </a>
+                  @endif
+                </div>
+              </td>
+            </tr>
+          @endforeach
+        @else
           <tr>
-            <td>{{ $team->name }}</td>
-            <td class="center aligned">{{ count($team->members) }}</td>
-            <td class="center aligned">
-              @foreach($team->members as $founder)
-                @if($loop->first)
-                  {{ $founder->user->name }}
-                @endif
-              @endforeach
-            </td>
-            <td class="center aligned">
-              <div class="ui basic mini icon buttons">
-                @if(isset($passiveMember))
-                  <a class="ui disabled button">
-                    <i class="check icon"></i>
-                  </a>
-                @else
-                  <a class="ui icon apply-{{ $team->id }} button" class="ui button" data-content="{{ __('Ekibe Başvur') }}" data-variation="mini inverted" data-position="top center">
-                    <i class="check icon"></i>
-                  </a>
-                @endif
+            <td colspan="4">
+              <div class="ui info message">
+                {{ __('Herhangi bir grup bulunamadı.') }}
               </div>
             </td>
           </tr>
-        @endforeach
+        @endif
       </tbody>
     </table>
   </div>

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sector extends Model
 {
@@ -21,13 +22,7 @@ class Sector extends Model
      * @var array
      */
     protected $fillable = [
-        'team_id', 'name',
+        'name',
+        'team_id',
     ];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
 }

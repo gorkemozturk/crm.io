@@ -34,3 +34,12 @@ Route::put('my-team/application/{id}/confirm', 'TeamMemberController@confirm')->
 Route::get('my-team/members', 'TeamMemberController@members')->name('member.list');
 Route::get('my-team/applications', 'TeamMemberController@applications')->name('member.application');
 Route::get('my-team/dashboard', 'TeamMemberController@dashboard')->name('member.dashboard');
+
+/*
+|--------------------------------------------------------------------------
+| Settings Module Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('settings')->group(function () {
+    Route::resource('/sector', 'Settings\SectorController');
+});
