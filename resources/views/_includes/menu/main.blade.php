@@ -16,16 +16,16 @@
         </div>
       @else
         <a class="borderless item">
-          {{ __('Schedule') }}
+          {{ __('Takvim') }}
         </a>
         <a class="borderless item">
-          {{ __('Firms') }}
+          {{ __('Firmalar') }}
         </a>
         <a class="borderless item">
-          {{ __('Directory') }}
+          {{ __('Rehber') }}
         </a>
-        <a href="{{ route('teams.index') }}" class="borderless {{ Request::is('teams*') ? 'active' : '' }} item">
-          {{ __('My Team') }}
+        <a href="{{ route('teams.index') }}" class="borderless @if(Request::is('teams*')) active @elseif(Request::is('my-team*')) active @endif item">
+          {{ __('Ekibim') }}
         </a>
         <div class="right menu">
           <a class="icon item">

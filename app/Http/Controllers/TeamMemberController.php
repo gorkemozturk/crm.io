@@ -9,6 +9,16 @@ use App\TeamMember;
 class TeamMemberController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display applications.
      *
      * @return \Illuminate\Http\Response
@@ -48,7 +58,7 @@ class TeamMemberController extends Controller
 
         TeamMember::create($data);
 
-        return redirect()->route('teams.index')->with('success', 'Ekibe başarılı bir şekilde başvurdunuz.');
+        return redirect()->route('teams.index')->with('success', trans('Ekibe başarılı bir şekilde başvurdunuz.'));
     }
 
     /**
@@ -77,5 +87,21 @@ class TeamMemberController extends Controller
         TeamMember::find($id)->delete();
 
         return redirect()->back()->with('success', trans('Takımdan başarılı bir şekilde çıkardınız.'));
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
+    {
+        // The query which related with members.
+        $isMember = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
+
+        // The query which related with member mates.
+        $members = TeamMember::where('team_id', $isMember->team_id)->where('is_active', true)->first();
+
+        return view('team.dashboard')->withIsMember($isMember)->withMembers($members);
     }
 }

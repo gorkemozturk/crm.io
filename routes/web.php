@@ -28,8 +28,9 @@ Route::resource('/teams', 'TeamController');
 | Team Member Module Routes
 |--------------------------------------------------------------------------
 */
-Route::post('myteam/application/{id}/apply', 'TeamMemberController@apply')->name('member.apply');
-Route::delete('myteam/application/{id}/destroy', 'TeamMemberController@destroy')->name('member.destroy');
-Route::put('myteam/application/{id}/confirm', 'TeamMemberController@confirm')->name('member.confirm');
-Route::get('myteam/members', 'TeamMemberController@members')->name('member.list');
-Route::get('myteam/applications', 'TeamMemberController@applications')->name('member.application');
+Route::post('my-team/application/{id}/apply', 'TeamMemberController@apply')->name('member.apply');
+Route::delete('my-team/application/{id}/destroy', 'TeamMemberController@destroy')->name('member.destroy');
+Route::put('my-team/application/{id}/confirm', 'TeamMemberController@confirm')->name('member.confirm');
+Route::get('my-team/members', 'TeamMemberController@members')->name('member.list');
+Route::get('my-team/applications', 'TeamMemberController@applications')->name('member.application');
+Route::get('my-team/dashboard', 'TeamMemberController@dashboard')->name('member.dashboard');

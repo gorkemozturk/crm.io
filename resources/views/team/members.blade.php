@@ -23,9 +23,9 @@
     <table class="ui celled striped three column table">
       <thead>
         <tr>
-          <th style="border-radius: 0">Adı / Soyadı</th>
-          <th>E-Mail</th>
-          <th class="center aligned" style="border-radius: 0">İşlem</th>
+          <th style="border-radius: 0">{{ __('Adı / Soyadı') }}</th>
+          <th>{{ __('E-Mail') }}</th>
+          <th class="center aligned" style="border-radius: 0">{{ __('İşlem') }}</th>
         </tr>
       </thead>
       <tbody>
@@ -49,22 +49,22 @@
             <i class="close icon"></i>
             <div style="margin: 0" class="ui segments">
               <div class="ui center aligned secondary segment">
-                Devam Etmek İstediğinize Emin Misiniz?
+                {{ __('Devam Etmek İstediğinize Emin Misiniz?') }}
               </div>
               <div class="ui center aligned segment">
                 <div class="ui info icon message">
                   <i class="info icon"></i>
-                  Yaptığınız işlemin geri dönüşü yoktur. Devam etmek istediğinize emin misiniz?
+                  {{ __('Yaptığınız işlemin geri dönüşü yoktur. Devam etmek istediğinize emin misiniz?') }}
                 </div>
               </div>
               <div class="ui center aligned secondary actions segment">
                 <button type="submit" class="ui negative basic button" onclick="event.preventDefault();document.getElementById('destroy-{{ $member->id }}-form').submit();">
                   <i class="erase icon"></i>
-                  Takımdan Çıkar
+                  {{ __('Takımdan Çıkar') }}
                 </button>
                 <a class="ui basic grey cancel button">
                   <i class="close icon"></i>
-                  Vazgeç
+                  {{ __('Vazgeç') }}
                 </a>
               </div>
             </div>
@@ -79,7 +79,7 @@
     </table>
   </div>
   <div class="ui center aligned segment">
-    {{ __('Toplam Üye') }}:
+    {{ __('Toplam Üye') }}: {{ count($members) }}
   </div>
 </div>
 @endsection

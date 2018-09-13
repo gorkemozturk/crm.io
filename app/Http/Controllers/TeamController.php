@@ -11,6 +11,16 @@ use App\Http\Requests\TeamStoreRequest as StoreRequest;
 class TeamController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -25,9 +35,7 @@ class TeamController extends Controller
         $teams = Team::all();
 
         if(isset($isMember)) {
-          $members = TeamMember::where('team_id', $isMember->team_id)->where('is_active', true)->first();
-
-          return view('team.dashboard')->withIsMember($isMember)->withMembers($members);
+          return redirect()->route('member.dashboard');
         }else {
           return view('team.index')->withPassiveMember($passiveMember)->withTeams($teams);
         }
@@ -61,7 +69,7 @@ class TeamController extends Controller
 
         TeamMember::create($data);
 
-        return redirect()->route('teams.index')->with('success', 'Ekip başarılı bir şekilde kuruldu.');
+        return redirect()->route('teams.index')->with('success', trans('Ekip başarılı bir şekilde kuruldu.'));
     }
 
     /**
