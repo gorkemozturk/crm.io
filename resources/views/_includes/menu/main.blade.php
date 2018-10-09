@@ -21,11 +21,11 @@
         <a href="{{ route('firms.index') }}" class="borderless {{ Request::is('firms*') ? 'active' : '' }} item">
           {{ __('Firmalar') }}
         </a>
-        <a class="borderless item">
+        <a href="{{ route('directory.index') }}" class="borderless item">
           {{ __('Rehber') }}
         </a>
         <a href="{{ route('member.dashboard') }}" class="borderless {{ Request::is('my-team*') ? 'active' : '' }} item">
-          {{ __('Ekibim') }}
+            {{ __('Ekibim') }}
         </a>
         <div class="right menu">
           <a class="icon item">

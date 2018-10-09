@@ -18,11 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('settings', 'Settings\ShowSetting')->name('settings.index');
 
-Route::get('/settings', 'Settings\ShowSetting')->name('settings.index');
+Route::get('firm/{id}/client/create', ['as' => 'directory.create', 'uses' => 'ClientController@create']);
+Route::post('firm/{id}/client/store', ['as' => 'directory.store', 'uses' => 'ClientController@store']);
 
-Route::resource('/teams', 'TeamController');
-Route::resource('/firms', 'FirmController');
+Route::resource('teams', 'TeamController');
+Route::resource('firms', 'FirmController');
+Route::resource('directory', 'ClientController')->except(['create', 'store']);
 
 /*
 |--------------------------------------------------------------------------

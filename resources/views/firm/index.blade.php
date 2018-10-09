@@ -45,10 +45,10 @@
                                 <td>{{ $firm->website }}</td>
                                 <td class="center aligned">
                                     <div class="ui basic mini icon buttons">
-                                        <a class="ui button">
+                                        <a href="{{ route('firms.show', $firm->id) }}" class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Görüntüle') }}">
                                             <i class="unhide icon"></i>
                                         </a>
-                                        <a class="ui button">
+                                        <a class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Düzenle') }}">
                                             <i class="edit icon"></i>
                                         </a>
                                     </div>

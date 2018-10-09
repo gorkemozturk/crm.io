@@ -18,7 +18,7 @@ class FirmController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('memberless');
+        $this->middleware('nonmember');
     }
 
     /**
@@ -70,7 +70,9 @@ class FirmController extends Controller
      */
     public function show($id)
     {
-        //
+        $firm = Model::findOrFail($id);
+
+        return view('firm.show', compact('firm'));
     }
 
     /**

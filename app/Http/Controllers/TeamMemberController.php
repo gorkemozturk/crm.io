@@ -16,7 +16,7 @@ class TeamMemberController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('memberless')->only('dashboard');
+        $this->middleware('nonmember')->only('dashboard');
     }
 
     /**

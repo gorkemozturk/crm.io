@@ -1,28 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Settings;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Sector as Model;
+use App\Http\Requests\ClientStoreRequest as StoreRequest;
+use App\Client as Model;
 use App\TeamMember;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\SectorStoreRequest as StoreRequest;
-use App\Http\Requests\SectorUpdateRequest as UpdateRequest;
 
-class SectorController extends Controller
+class ClientController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('nonmember');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -30,37 +17,39 @@ class SectorController extends Controller
      */
     public function index()
     {
-        $sectors = Model::get();
-
-        return view('settings.sector.index', compact('sectors'));
+        return view('directory.index');
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('settings.sector.create');
+        return view('directory.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, $id)
     {
         $member = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
 
         $data = $request->all();
+        $data['user_id'] = $member->user_id;
         $data['team_id'] = $member->team_id;
+        $data['firm_id'] = $id;
 
         Model::create($data);
 
-        return redirect()->route('sector.index')->with('success', trans('Sektör başarılı bir şekilde eklendi.'));
+        return redirect()->route('directory.index')->with('success', trans('Kişi başarılı bir şekilde eklendi.'));
     }
 
     /**
@@ -82,9 +71,7 @@ class SectorController extends Controller
      */
     public function edit($id)
     {
-        $sector = Model::findOrFail($id);
-
-        return view('settings.sector.edit', compact('sector'));
+        //
     }
 
     /**
@@ -94,11 +81,9 @@ class SectorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        Model::findOrFail($id)->update($request->all());
-
-        return redirect()->route('sector.index')->with('success', trans('Sektör başarılı bir şekilde güncellendi.'));
+        //
     }
 
     /**
@@ -109,8 +94,6 @@ class SectorController extends Controller
      */
     public function destroy($id)
     {
-        Model::findOrFail($id)->delete();
-
-        return redirect()->route('sector.index')->with('success', trans('Sektör başarılı bir şekilde silindi.'));
+        //
     }
 }
