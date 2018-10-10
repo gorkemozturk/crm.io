@@ -17,6 +17,7 @@ class TeamMemberController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('nonmember')->only('dashboard');
+        $this->middleware('nonowner')->only('destroy', 'confirm');
     }
 
     /**

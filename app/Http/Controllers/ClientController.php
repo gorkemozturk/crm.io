@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientStoreRequest as StoreRequest;
+use App\Http\Requests\ClientStoreRequest as UpdateRequest;
 use App\Client as Model;
 use App\TeamMember;
 use Illuminate\Support\Facades\Auth;
@@ -11,13 +12,28 @@ use Illuminate\Support\Facades\Auth;
 class ClientController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('nonmember')->only('index');
+        $this->middleware('nonowner')->only('destroy');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('directory.index');
+        $member = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
+        $clients = Model::where('team_id', '=', $member->team_id)->get();
+
+        return view('directory.index', compact('clients'));
     }
 
     /**
@@ -71,7 +87,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Model::find($id);
+
+        return view('directory.edit', compact('client'));
     }
 
     /**
@@ -81,9 +99,11 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        Model::findOrFail($id)->update($request->all());
+
+        return redirect()->back()->with('success', trans('Kişiyi başarılı bir şekilde güncellediniz.'));
     }
 
     /**
@@ -94,6 +114,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Model::findOrFail($id)->delete();
+
+        return redirect()->back()->with('success', trans('Kişiyi başarılı bir şekilde sildiniz.'));
     }
 }

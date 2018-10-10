@@ -85,10 +85,10 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
-$('.button').popup();
-@foreach($members as $member)
-  $('.destroy-{{ $member->id }}.modal').modal('attach events', '.destroy-{{ $member->id }}.button', 'show').modal('setting', 'transition', 'fade up');
-@endforeach
-</script>
+  <script type="text/javascript">
+  $('.button').popup();
+  @foreach($members as $member)
+    $('.destroy-{{ $member->id }}.modal').modal('attach events', '.destroy-{{ $member->id }}.button', 'show').modal('setting', 'transition', 'fade up');
+  @endforeach
+  </script>
 @endsection

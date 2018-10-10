@@ -34,4 +34,12 @@ class Client extends Model
         'province',
         'address',
     ];
+
+    /**
+     * Get the firm of the client.
+     */
+    public function firm()
+    {
+        return $this->belongsTo('App\Firm');
+    }
 }
