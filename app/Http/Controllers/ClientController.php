@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientStoreRequest as StoreRequest;
-use App\Http\Requests\ClientStoreRequest as UpdateRequest;
+use App\Http\Requests\ClientUpdateRequest as UpdateRequest;
 use App\Client as Model;
 use App\TeamMember;
 use Illuminate\Support\Facades\Auth;

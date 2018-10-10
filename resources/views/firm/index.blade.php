@@ -48,9 +48,12 @@
                                         <a href="{{ route('firms.show', $firm->id) }}" class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Görüntüle') }}">
                                             <i class="unhide icon"></i>
                                         </a>
-                                        <a class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Düzenle') }}">
+                                        <a href="{{ route('firms.edit', $firm->id) }}" class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Düzenle') }}">
                                             <i class="edit icon"></i>
                                         </a>
+                                        <button onclick="event.preventDefault();document.getElementById('destroy-{{ $firm->id }}-form').submit();"  class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Sil') }}">
+                                            <i class="remove icon"></i>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -66,9 +69,16 @@
             </div>
         @endif
         <div class="ui center aligned segment">
-            {{ __('Toplam Firma') }}: {{ __(count($firms)) }}
+            {{ __('Toplam Firma') }}: {{ (count($firms)) }}
         </div>
     </div>
+
+    @foreach($firms as $firm)
+        <form id="destroy-{{ $firm->id }}-form" action="{{ route('firms.destroy', $firm->id) }}" method="POST" style="display: none;">
+            @method('DELETE')
+            @csrf
+        </form>
+    @endforeach
 @endsection
 
 @section('scripts')

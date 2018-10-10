@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\FirmStoreRequest as StoreRequest;
+use App\Http\Requests\FirmUpdateRequest as UpdateRequest;
 use App\Firm as Model;
 use App\TeamMember;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class FirmController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('nonmember');
+        $this->middleware('nonowner')->only('destroy');
     }
 
     /**
@@ -83,7 +85,9 @@ class FirmController extends Controller
      */
     public function edit($id)
     {
-        //
+        $firm = Model::findOrFail($id);
+
+        return view('firm.edit', compact('firm'));
     }
 
     /**
@@ -93,9 +97,11 @@ class FirmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        Model::findOrFail($id)->update($request->all());
+
+        return redirect()->back()->with('success', trans('Firma başarılı bir şekilde güncellendi.'));
     }
 
     /**
@@ -106,6 +112,8 @@ class FirmController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Model::findOrFail($id)->delete();
+
+        return redirect()->back()->with('success', trans('Firmayı başarılı bir şekilde sildiniz.'));
     }
 }

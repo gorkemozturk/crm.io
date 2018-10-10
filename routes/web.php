@@ -20,8 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('settings', 'Settings\ShowSetting')->name('settings.index');
 
-Route::get('firm/{id}/client/create', ['as' => 'directory.create', 'uses' => 'ClientController@create']);
-Route::post('firm/{id}/client/store', ['as' => 'directory.store', 'uses' => 'ClientController@store']);
+Route::get('directory/{id}/create', ['as' => 'directory.create', 'uses' => 'ClientController@create']);
+Route::post('directory/{id}/store', ['as' => 'directory.store', 'uses' => 'ClientController@store']);
 
 Route::resource('teams', 'TeamController');
 Route::resource('firms', 'FirmController');

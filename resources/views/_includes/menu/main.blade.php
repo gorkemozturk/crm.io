@@ -21,7 +21,7 @@
         <a href="{{ route('firms.index') }}" class="borderless {{ Request::is('firms*') ? 'active' : '' }} item">
           {{ __('Firmalar') }}
         </a>
-        <a href="{{ route('directory.index') }}" class="borderless item">
+        <a href="{{ route('directory.index') }}" class="borderless {{ Request::is('directory*') ? 'active' : '' }} item">
           {{ __('Rehber') }}
         </a>
         <a href="{{ route('member.dashboard') }}" class="borderless {{ Request::is('my-team*') ? 'active' : '' }} item">
