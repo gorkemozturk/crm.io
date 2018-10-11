@@ -43,6 +43,9 @@
                                     <a class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Görüntüle') }}">
                                         <i class="unhide icon"></i>
                                     </a>
+                                    <a href="{{ route('schedule.create', $client->id) }}" class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Plan Ayarla') }}">
+                                        <i class="clock icon"></i>
+                                    </a>
                                     <a href="{{ route('directory.edit', $client->id) }}" class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Düzenle') }}">
                                         <i class="edit icon"></i>
                                     </a>

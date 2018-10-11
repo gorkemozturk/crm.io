@@ -15,7 +15,7 @@
           </div>
         </div>
       @else
-        <a class="borderless item">
+        <a href="{{ route('schedule.index') }}" class="borderless {{ Request::is('schedule*') ? 'active' : '' }} item">
           {{ __('Takvim') }}
         </a>
         <a href="{{ route('firms.index') }}" class="borderless {{ Request::is('firms*') ? 'active' : '' }} item">

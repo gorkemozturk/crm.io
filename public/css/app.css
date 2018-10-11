@@ -66,6 +66,13 @@ body {
   text-transform: uppercase;
   font-weight: normal;
 }
+.ui.form .inline.fields label {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.ui.form .inline.fields .ui.radio.checkbox label {
+  text-transform: none;
+}
 
 .ui.message {
   border-radius: 0;

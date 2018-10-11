@@ -15,6 +15,8 @@
   <!-- Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+  @yield('stylesheets')
 </head>
 <body>
   <div id="app">
