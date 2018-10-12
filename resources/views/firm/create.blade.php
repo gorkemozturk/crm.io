@@ -52,7 +52,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="two fields">
+                <div class="three fields">
                     <div class="field {{ $errors->has('website') ? 'error' : '' }}">
                         <label style="text-align: left">{{ __('Website') }}</label>
                         <input type="text" name="website" placeholder="Website" autocomplete="off" value="{{ old('website') }}">
@@ -74,6 +74,20 @@
                         @if ($errors->has('division'))
                             <div class="ui negative message">
                                 {{ $errors->first('division') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="field {{ $errors->has('sector_id') ? 'error' : '' }}">
+                        <label style="text-align: left">{{ __('Sektör') }}</label>
+                        <select class="ui dropdown" name="sector_id">
+                            <option value="">{{ __('Please Select') }}</option>
+                            @foreach($sectors as $sector)
+                                <option value="{{ $sector->id }}">{{ $sector->name }}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('sector_id'))
+                            <div class="ui negative message">
+                                {{ $errors->first('sector_id') }}
                             </div>
                         @endif
                     </div>

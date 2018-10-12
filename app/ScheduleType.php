@@ -26,4 +26,12 @@ class ScheduleType extends Model
         'name',
         'color',
     ];
+
+    /**
+     * Get the schedules.
+     */
+    public function schedules()
+    {
+        return $this->hasMany('App\Schedule');
+    }
 }

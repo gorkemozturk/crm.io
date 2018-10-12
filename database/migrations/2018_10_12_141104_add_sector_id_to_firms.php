@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColorToScheduleTypes extends Migration
+class AddSectorIdToFirms extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColorToScheduleTypes extends Migration
      */
     public function up()
     {
-        Schema::table('schedule_types', function (Blueprint $table) {
-            $table->string('color')->after('name');
+        Schema::table('firms', function (Blueprint $table) {
+            $table->integer('sector_id')->unsigned()->after('team_id');
         });
     }
 
@@ -25,7 +25,7 @@ class AddColorToScheduleTypes extends Migration
      */
     public function down()
     {
-        Schema::table('schedule_types', function (Blueprint $table) {
+        Schema::table('firms', function (Blueprint $table) {
             //
         });
     }

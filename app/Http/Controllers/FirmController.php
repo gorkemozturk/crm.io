@@ -7,6 +7,7 @@ use App\Http\Requests\FirmStoreRequest as StoreRequest;
 use App\Http\Requests\FirmUpdateRequest as UpdateRequest;
 use App\Firm as Model;
 use App\TeamMember;
+use App\Sector;
 use Illuminate\Support\Facades\Auth;
 
 class FirmController extends Controller
@@ -42,7 +43,10 @@ class FirmController extends Controller
      */
     public function create()
     {
-        return view('firm.create');
+        $member = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
+        $sectors = Sector::where('team_id', $member->team_id)->get();
+
+        return view('firm.create', compact('sectors'));
     }
 
     /**
@@ -85,9 +89,11 @@ class FirmController extends Controller
      */
     public function edit($id)
     {
+        $member = TeamMember::where('user_id', Auth::user()->id)->where('is_active', true)->first();
+        $sectors = Sector::where('team_id', $member->team_id)->get();
         $firm = Model::findOrFail($id);
 
-        return view('firm.edit', compact('firm'));
+        return view('firm.edit', compact('firm', 'sectors'));
     }
 
     /**

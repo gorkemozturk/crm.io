@@ -23,23 +23,27 @@
                 </tbody>
                 <tbody>
                     <tr>
-                        <td>{{ __('Firma Adı') }}</td>
+                        <td style="background: #fafafa">{{ __('Firma Adı') }}</td>
                         <td>{{ $firm->name }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('Websitesi') }}</td>
+                        <td style="background: #fafafa">{{ __('Sektör') }}</td>
+                        <td>{{ $firm->sector->name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="background: #fafafa">{{ __('Websitesi') }}</td>
                         <td>{{ $firm->website }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('E-Mail') }}</td>
+                        <td style="background: #fafafa">{{ __('E-Mail') }}</td>
                         <td>{{ $firm->email }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('Sektör') }}</td>
+                        <td style="background: #fafafa">{{ __('Sektör') }}</td>
                         <td>dsds </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Klasman') }}</td>
+                        <td style="background: #fafafa">{{ __('Klasman') }}</td>
                         <td>
                             @if($firm->division === 1)
                                 <div class="ui teal label">A</div>
@@ -53,11 +57,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>{{ __('Telefon') }}</td>
+                        <td style="background: #fafafa">{{ __('Telefon') }}</td>
                         <td>{{ $firm->phone }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('Faks') }}</td>
+                        <td style="background: #fafafa">{{ __('Faks') }}</td>
                         <td>{{ $firm->fax }}</td>
                     </tr>
                 </tbody>

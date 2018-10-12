@@ -25,6 +25,7 @@ class FirmUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'sector_id' => 'required',
             'email' => 'required|email',
             'fax' => 'required',
             'phone' => 'required',

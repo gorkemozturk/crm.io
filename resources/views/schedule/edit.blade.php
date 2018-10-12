@@ -54,7 +54,7 @@
                         <select name="schedule_type_id" class="ui dropdown">
                             @foreach($scheduleTypes as $type)
                                 <option value="">{{ __('Lütfen Seçiniz') }}</option>
-                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                <option value="{{ $type->id }}" @if($type->id === $schedule->schedule_type_id) selected @endif>{{ $type->name }}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('schedule_type_id'))

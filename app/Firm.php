@@ -24,6 +24,7 @@ class Firm extends Model
     protected $fillable = [
         'user_id',
         'team_id',
+        'sector_id',
         'name',
         'email',
         'fax',
@@ -31,4 +32,12 @@ class Firm extends Model
         'website',
         'division',
     ];
+
+    /**
+     * Get the sector of the firm.
+     */
+    public function sector()
+    {
+        return $this->belongsTo('App\Sector');
+    }
 }

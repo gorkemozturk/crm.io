@@ -25,4 +25,12 @@ class Sector extends Model
         'name',
         'team_id',
     ];
+
+    /**
+     * Get the firms.
+     */
+    public function firms()
+    {
+        return $this->hasMany('App\Firm');
+    }
 }

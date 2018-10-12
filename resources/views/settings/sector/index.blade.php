@@ -65,16 +65,30 @@
                     {{ __('Devam Etmek İstediğinize Emin Misiniz?') }}
                 </div>
                 <div class="ui center aligned segment">
-                    <div class="ui info icon message">
-                        <i class="info icon"></i>
-                        {{ __('Yaptığınız işlemin geri dönüşü yoktur. Devam etmek istediğinize emin misiniz?') }}
-                    </div>
+                    @if(count($sector->firms) > 0)
+                        <div class="ui info icon message">
+                            <i class="info icon"></i>
+                            {{ __('Silmek istediğiniz sektör kullanıldığından silemezsiniz.') }}
+                        </div>
+                    @else
+                        <div class="ui info icon message">
+                            <i class="info icon"></i>
+                            {{ __('Yaptığınız işlemin geri dönüşü yoktur. Devam etmek istediğinize emin misiniz?') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="ui center aligned secondary actions segment">
-                    <button type="submit" class="ui negative basic destroy button" onclick="event.preventDefault();document.getElementById('destroy-{{ $sector->id }}-form').submit();">
-                        <i class="close icon"></i>
-                        {{ __('Sil') }}
-                    </button>
+                    @if(count($sector->firms) > 0)
+                        <a class="ui negative basic disabled button">
+                            <i class="close icon"></i>
+                            {{ __('Sil') }}
+                        </a>
+                    @else
+                        <button type="submit" class="ui negative basic destroy button" onclick="event.preventDefault();document.getElementById('destroy-{{ $sector->id }}-form').submit();">
+                            <i class="close icon"></i>
+                            {{ __('Sil') }}
+                        </button>
+                    @endif
                     <a class="ui basic grey cancel button">
                         <i class="close icon"></i>
                         {{ __('Vazgeç') }}
