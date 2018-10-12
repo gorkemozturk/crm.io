@@ -44,18 +44,11 @@
                 events: [
                     @foreach($schedules as $schedule)
                     {
-                        @if($schedule->schedule_type_id === 1)
-                            title: '{{ $schedule->scheduleType->name }}: {{ $schedule->client->name }}',
-                            start: '{{ $schedule->meeting_at . 'T' .  $schedule->started_at }}',
-                            end: '{{ $schedule->meeting_at . 'T' .  $schedule->finished_at }}',
-                            color: '#378006',
-                            url: 'deneme',
-                        @elseif($schedule->schedule_type_id === 2)
-                            title: '{{ $schedule->scheduleType->name }}: {{ $schedule->client->name }}',
-                            start: '{{ $schedule->meeting_at . 'T' .  $schedule->started_at }}',
-                            end: '{{ $schedule->meeting_at . 'T' .  $schedule->finished_at }}',
-                            url: 'deneme',
-                        @endif
+                        title: '{{ $schedule->scheduleType->name }}: {{ $schedule->client->name }}',
+                        start: '{{ $schedule->meeting_at . 'T' .  $schedule->started_at }}',
+                        end: '{{ $schedule->meeting_at . 'T' .  $schedule->finished_at }}',
+                        url: '{{ route('schedule.edit', $schedule->id) }}',
+                        color: '{{ $schedule->scheduleType->color }}',
                     },
                     @endforeach
                 ],

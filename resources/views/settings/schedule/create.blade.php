@@ -4,6 +4,10 @@
     {{ __('Ayarlar') }}
 @endsection
 
+@section('stylesheets')
+    <link rel='stylesheet' href='{{ asset('css/spectrum.css') }}' />
+@endsection
+
 @section('content')
     <div class="ui segments">
         <div class="ui center aligned segment">
@@ -25,6 +29,15 @@
                             </div>
                         @endif
                     </div>
+                    <div class="field {{ $errors->has('color') ? 'error' : '' }}">
+                        <label style="text-align: left">{{ __('Renk') }}</label>
+                        <input id="colorpicker" type="text" name="color" autocomplete="off">
+                        @if ($errors->has('color'))
+                            <div class="ui negative message">
+                                {{ $errors->first('color') }}
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </form>
         </div>
@@ -35,4 +48,15 @@
             </button>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src='{{ asset('js/spectrum.js') }}'></script>
+    <script>
+        $("#colorpicker").spectrum({
+            showInput: true,
+            allowEmpty:true,
+            preferredFormat: "hex",
+        });
+    </script>
 @endsection

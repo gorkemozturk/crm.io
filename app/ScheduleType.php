@@ -24,5 +24,6 @@ class ScheduleType extends Model
     protected $fillable = [
         'team_id',
         'name',
+        'color',
     ];
 }

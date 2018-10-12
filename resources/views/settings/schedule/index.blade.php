@@ -29,7 +29,7 @@
                     <tbody>
                         @foreach($schedules as $schedule)
                             <tr>
-                                <td>{{ $schedule->name }}</td>
+                                <td><i class="circle icon" style="color: {{ $schedule->color }}"></i>  {{ $schedule->name }}</td>
                                 <td class="center aligned">
                                     <div class="ui basic mini icon buttons">
                                         <a href="{{ route('schedule-type.edit', $schedule->id) }}" class="ui button" data-variation="mini inverted" data-position="top center" data-content="{{ __('Düzenle') }}">

@@ -25,6 +25,7 @@ class UpdateScheduleTypeRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'color' => 'required',
         ];
     }
 }

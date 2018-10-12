@@ -101,3 +101,7 @@ body {
 .ui.label {
   border-radius: .15em;
 }
+
+.fc-button {
+  font-family: 'Roboto Condensed', sans-serif;
+}
